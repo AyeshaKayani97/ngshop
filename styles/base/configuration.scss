@@ -1,0 +1,14 @@
+@import "./mixins.scss";
+
+
+body{
+    font-family: "Open Sans" , sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    @include rest-list;
+}

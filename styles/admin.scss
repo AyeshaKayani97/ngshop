@@ -1,0 +1,40 @@
+@import "normalize.css/normalize.css";
+//Base
+@import "./base/colors.scss";
+@import "./base/fonts.scss";
+@import "./base/mixins.scss";
+// bootstrap link 
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import 'primeng/resources/themes/saga-blue/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
+
+@import "primeflex/primeflex.css";
+
+// shell 
+
+@import "./apps/admin/shell.scss";
+@import "./base/configuration.scss";
+
+
+
+
+
+
+
+//Pages
+
+// @import "./apps/admin/pages/home-page.scss";
+// @import "./apps/admin/pages/product-list-page.scss";
+
+// //Pages
+// @import "./apps/admin/shared/header.scss";
+// @import "./apps/admin/shared/footer.scss";
+
+//libs
+@import "./libs/ui/ui.scss";
+
+
+// .red {
+//     color: red;
+// }
