@@ -43,7 +43,7 @@ export class ProductListComponent  implements OnInit, OnDestroy {
     })
   }
   categoryFilter(){
-    const selectedCategories= this.categories?.filter(category=>category?.checked).map(category=>category?.id);
+    const selectedCategories:any= this.categories?.filter(category=>category?.checked).map(category=>category?.id);
     console.log(selectedCategories);
 
     this._getProducts(selectedCategories);

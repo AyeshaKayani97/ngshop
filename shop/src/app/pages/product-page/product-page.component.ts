@@ -16,7 +16,7 @@ import { Product, ProductsService } from '@ngshop/products';
 })
 export class ProductPageComponent implements OnInit , OnDestroy{
   // product!:Product;
-  product!: Product;
+  product!: any;
   quantity = 1;
   endSub$:Subject<any>= new Subject
   constructor(
