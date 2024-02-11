@@ -23,6 +23,9 @@ export class CategoriesService {
     return this.http.get<Category>(`http://localhost:5000/api/v1/categories/${categoryId}`)
 
   }
+  // getCategory(categoryId: string): Observable<Category> {
+  //   return this.http.get<Category>(`${this.apiURLCategories}/${categoryId}`);
+  // }
   createCategory(category:Category){
     return this.http.post<Category>("http://localhost:5000/api/v1/categories",category);
 

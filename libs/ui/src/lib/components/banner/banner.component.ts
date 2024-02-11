@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'banner',
+  selector: 'ui-banner',
   standalone: true,
-  imports: [],
+  imports: [ButtonModule],
   templateUrl: './banner.component.html',
-  styleUrl: './banner.component.sass'
+  styles: ``
 })
 export class BannerComponent {
 

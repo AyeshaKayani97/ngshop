@@ -6,5 +6,6 @@ export const appRoutes: Route[] = [
 
     { path: '', component: HomePageComponent },
     { path: 'products', component: ProductPageComponent },
+    
 
 ];

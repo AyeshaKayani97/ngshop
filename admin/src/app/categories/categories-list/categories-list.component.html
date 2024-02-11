@@ -6,7 +6,7 @@
             <div class="col-12">
                 <p-toolbar>
                     <div class="p-toolbar-group-start">
-                        <p-button label="Add" icon="pi pi-plus" routerLink="/form" styleClass="p-button-success"></p-button>
+                        <p-button label="Add" icon="pi pi-plus" routerLink="/categories/form" styleClass="p-button-success"></p-button>
                     </div>
                     
                 </p-toolbar>
@@ -42,3 +42,8 @@
          
     </p-card>
 </div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>

@@ -14,12 +14,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CategoriesService } from '@ngshop/products/services/categories.service';
 import { Category } from '@ngshop/products/models/category';
 import { EditorModule } from 'primeng/editor';
-import { MessageService } from 'primeng/api';
 import { Product } from '@ngshop/products/models/product';
-import { timer, lastValueFrom } from 'rxjs';
-
-
-
+import { timer } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -38,7 +35,7 @@ export class ProductFormComponent {
  
   form!:FormGroup;
 
-  constructor(private formBuilder:FormBuilder,private messageService:MessageService , private location:Location, private productsService:ProductsService,private categoriesService:CategoriesService){}
+  constructor(private formBuilder:FormBuilder,private messageService:MessageService, private location:Location, private productsService:ProductsService,private categoriesService:CategoriesService){}
 ngOnInit():void{
   this._initForm();
   this._getCategories();

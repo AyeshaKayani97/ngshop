@@ -7,6 +7,8 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import 'primeng/resources/themes/saga-blue/theme.css';
 @import 'primeng/resources/primeng.min.css';
+// @import 'primeng/resources/themes/nova-light/theme.css';
+
 @import 'primeicons/primeicons.css';
 
 @import "primeflex/primeflex.css";
@@ -15,6 +17,11 @@
 
 @import "./apps/admin/shell.scss";
 @import "./base/configuration.scss";
+
+//Libs
+@import './libs/users/users.scss';
+
+@import "./apps//admin/dashboard.scss";
 
 
 

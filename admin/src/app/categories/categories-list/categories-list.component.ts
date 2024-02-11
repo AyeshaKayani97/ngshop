@@ -1,83 +1,97 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,OnDestroy } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { Category } from '@ngshop/products/models/category';
 import {CategoriesService} from '@ngshop/products/services/categories.service'
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessageService,ConfirmationService } from 'primeng/api';
 import { Location } from '@angular/common';
-import { timer } from 'rxjs';
-import { lastValueFrom } from 'rxjs';
-import { Router } from '@angular/router';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 const UI_MODULE=[
   ToolbarModule,
   ButtonModule,
   TableModule,
-  ToastModule
+  ToastModule,
+  ConfirmDialogModule,
 ]
 
 
 @Component({
   selector: 'admin-categories-list',
   standalone: true,
-  imports: [CardModule, UI_MODULE],
+  imports: [CardModule, UI_MODULE,CommonModule,RouterModule],
   templateUrl: './categories-list.component.html',
 
 })
 export class CategoriesListComponent {
   categories:Category[] = []
+  endsubs$: Subject<any> = new Subject();
 
-  //  categories = [
-  //   {
-  //     id:1,
-  //     name:"category-1",
-  //     icon:"category-1-icon",
-  
-  //   }, {
-  //     id:2,
-  //     name:"category-2",
-  //     icon:"category-2-icon",
-      
-  //   },
-  //   {
-  //     id:3,
-  //     name:"category-3",
-  //     icon:"category-3-icon",
-      
-  //   }
-  // ]
-  constructor(private categoriesServices: CategoriesService,private router:Router,private messageService:MessageService, private location:Location){}
+
+  constructor(private categoriesService: CategoriesService, private confirmationService: ConfirmationService,private router:Router,private messageService:MessageService, private location:Location){}
   ngOnInit():void{
-
-    this.categoriesServices.getCategories().subscribe(cats=>{
-      this.categories = cats;
-    })
-
+    this._getCategories();
 
   }
-  deleteCategory(categoryId:string){
-      this.categoriesServices.deleteCategory(categoryId).subscribe({
-          next: (response) => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category has been deleted' });
-            lastValueFrom(timer(2000)).then(() => {
-              this.location.back();
-            });
-          },
-          error: (error) => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category is not deleted' });
+  ngOnDestroy() {
+    this.endsubs$.next('some value');
+    this.endsubs$.complete();
+  }
 
-          }
-        });
-      }
+
+
+
+
       updateCategory(categoryId:string){
         this.router.navigateByUrl(`categories/form/${categoryId}`)
       }
 
+      deleteCategory(categoryId: string) {
+        this.confirmationService.confirm({
+          message: 'Do you want to Delete this Category?',
+          header: 'Delete Category',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.categoriesService.deleteCategory(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(
+              () => {
+                this._getCategories();
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Success',
+                  detail: 'Category is deleted!'
+                });
+              },
+              () => {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: 'Category is not deleted!'
+                });
+              }
+            );
+          }
+        });
+      }
+
+
+
+
+
+      
+      private _getCategories(){
+        this.categoriesService.getCategories().subscribe(cats=>{
+          this.categories = cats;
+        })
+      }
+      
 
 
 }

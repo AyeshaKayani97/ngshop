@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ngshop-footer',
+  selector: 'shop-footer',
   standalone: true,
   imports: [],
   templateUrl: './footer.component.html',
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+  ngOnInit(): void {}
 
 }
